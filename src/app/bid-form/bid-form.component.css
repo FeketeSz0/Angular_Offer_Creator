@@ -1,0 +1,51 @@
+/* Add global styles here */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  
+  /* Rest of the styles... */
+  
+  .bid-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bid-form h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-size: 200;
+  }
+  
+  .bid-form label {
+    font-weight: 200;
+  }
+  
+  .bid-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .bid-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .bid-form button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  

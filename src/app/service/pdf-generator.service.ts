@@ -10,24 +10,47 @@ export class PdfGeneratorService {
 
   constructor() {
     (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
-   }
-   generatePdf(bids: any[]): void {
+  }
+  generatePdf(bids: any[]): void {
+    const grandTotal = bids.reduce((total, bid) => total + (bid.unitPrice * 1.27) * bid.quantity, 0);
+    const tableBody = bids.map((bid, index) => [
+      `${index + 1}`,
+      bid.productName,
+      bid.quantity + ' pcs',
+      bid.unitPrice + ' HUF',
+      (bid.unitPrice * 1.27).toFixed(2) + ' HUF',
+      bid.totalPrice + ' HUF'
+    ]);
+
     const documentDefinition: any = {
       content: [
-        { text: 'Bid List', style: 'header' },
-        ...bids.map((bid, index) => ({
-          text: `${index + 1}. Product: ${bid.productName}, Quantity: ${bid.quantity}, Unit Price: ${bid.unitPrice}, Total Price: ${bid.totalPrice}`,
-          margin: [0, 0, 0, 5]
-        }))
+        { text: 'Dear Client!', style: 'header' },
+        '\n',
+        { text: 'Thank you for your interest in our service.....:', style: 'subheader' },
+        '\n\n',
+        { 
+          table: {
+            widths: ['*', '*', '*', '*', '*', '*'],
+            body: [
+              ['No.', 'Product', 'Qty', 'Unit Price', 'Grs. Unit Price', 'Grs. Total Price'],
+              ...tableBody
+            ],
+           
+          },
+          alignment: 'center',
+          margin: [0,0,0,50] 
+        },
+        {text: `Grand total is: ${grandTotal} HUF`},
       ],
       styles: {
         header: {
-          fontSize: 18,
+          fontSize: 12,
           bold: true
         }
       }
     };
+    
 
-    pdfMake.createPdf(documentDefinition).download('bid-list.pdf');
+    pdfMake.createPdf(documentDefinition).download('offer.pdf');
   }
 }

@@ -17,6 +17,7 @@ export class BidFormComponent {
     this.bidForm = this.formBuilder.group({
       productName: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
+      cost: ['', Validators.required],
       unitPrice: ['', [Validators.required, Validators.min(0)]]
     });
   }

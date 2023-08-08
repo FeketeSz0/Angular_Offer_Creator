@@ -1,14 +1,33 @@
-<h2>Bid List</h2>
+<h2>Offer creator</h2>
 <button (click)="showBidForm = !showBidForm">Add Item</button>
 <button (click)="downloadPdf()">Download PDF</button>
-<ul>
-  <li *ngFor="let bid of bids">
-   - id: {{bid.id}}
-    - name: {{ bid.productName }} 
-    - Qty: {{ bid.quantity }} 
-    - UP: {{ bid.unitPrice }} 
-    - TP: {{ bid.totalPrice }}
-    <button (click)="deleteId(bid.id)">Delete</button>
-  </li>
-</ul>
 <app-bid-form *ngIf="showBidForm" (submitBid)="addBid($event)"></app-bid-form>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Qty</th>
+      <th>Cost</th>
+      <th>Total Cost</th>
+      <th>Unit Price</th>
+      <th>Total Price</th>
+      <th>Profit</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bid of bids">
+      <td>{{ bid.id }}</td>
+      <td>{{ bid.productName }}</td>
+      <td>{{ bid.quantity }}</td>
+      <td>{{ bid.cost }}</td>
+      <td>{{ bid.cost * bid.quantity }}</td>
+      <td>{{ bid.unitPrice }}</td>
+      <td>{{ bid.totalPrice }}</td>
+      <td>{{bid.totalPrice - (bid.cost * bid.quantity)}}</td>
+      <td><button (click)="deleteId(bid.id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
